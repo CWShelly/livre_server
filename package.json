@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/CWShelly/livre_server/issues"
   },
-  "homepage": "https://github.com/CWShelly/livre_server#readme"
+  "homepage": "https://github.com/CWShelly/livre_server#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "knex": "^0.14.2",
+    "pg": "^7.4.0"
+  }
 }
