@@ -93,3 +93,19 @@ userRouter.put('/users/:id', jsonParser, (req, res, next)=>{
   // .catch(error=>console.log(error))
   // next(error)
 })
+
+
+userRouter.delete('/users/:id', (req, res, next)=>{
+   console.log(req.params.id);
+   knex('users')
+  .where('id', '=', req.params.id)
+  .del()
+  .then((rows)=>{
+      const user = rows[0];
+
+      res.send(user);
+  })
+  .catch((err)=>{
+      next(err);
+  });
+});

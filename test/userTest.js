@@ -12,7 +12,6 @@ const app = require(__dirname + '/../server/_server');
 const port = 4000;
 
 describe('the user ', ()=>{
-
   before((done)=>{
     this.server = app(port, console.log(`server up on ${port}`))
     done()
@@ -26,14 +25,14 @@ describe('the user ', ()=>{
 
   beforeEach(function(done) {
     knex.migrate.rollback()
-.then(function() {
+    .then(function() {
     knex.migrate.latest()
-.then(function() {
+    .then(function() {
     return knex.seed.run()
-.then(function() {
-    done();
-});
-});
+    .then(function() {
+      done();
+    });
+  });
 });
 });
 
@@ -64,10 +63,31 @@ afterEach(function(done) {
     .post('/api/users')
     .send({name:'Testy McTestface', email_address: 'mctestface@mctestface.com'})
     .end((err, res)=>{
-      console.log(res.body);
       expect(err).to.eql(null)
       expect(res.status).to.eql(200)
       done()
     })
+  })
+
+  it('should update the user db', (done)=>{
+    request('http://localhost:4000')
+    .put('/api/users/1')
+    .send({name:'TestPut', email_address: 'testput@testput.com'})
+    .end((err, res)=>{
+      expect(err).to.eql(null)
+      expect(res.status).to.eql(200)
+      done()
+    })
+  })
+
+  it('should delete from the user db', (done)=>{
+    request('http://localhost:4000')
+    .delete('/api/users/1')
+    .end((err, res)=>{
+      expect(err).to.eql(null)
+      expect(res.status).to.eql(200)
+      done()
+    })
+
   })
 })
