@@ -4,7 +4,7 @@ node_js:
 
 before_script:
   - npm install -g knex
-  - psql -c 'create database livreTest;' -U postgres
+  - psql -c 'create database livre_test;' -U postgres
 
 script:
   npm test
