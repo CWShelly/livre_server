@@ -8,7 +8,7 @@ module.exports = {
    test: {
        client: 'postgresql',
        connection: {
-           database: 'livreTest',
+           database: 'livre_test',
 
        },
        pool: {

@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  "8.4.0"
+
+before_script:
+  - npm install -g knex
+  - psql -c 'create database livre_test;' -U postgres
+
+script:
+  npm test
