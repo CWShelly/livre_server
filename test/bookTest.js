@@ -71,4 +71,27 @@ it('should post to the book db', (done)=>{
   })
 })
 
+
+it('should update the book db', (done)=>{
+  request('http://localhost:4000')
+  .put('/api/books/1')
+  .send({title: 'testPut title'})
+  .end((err, res)=>{
+    expect(err).to.eql(null)
+    expect(res.status).to.eql(200)
+    done()
+  })
+})
+
+it('should delete from the books db', (done)=>{
+  request('http://localhost:4000')
+  .delete('/api/books/1')
+  .end((err, res)=>{
+    expect(err).to.eql(null)
+    expect(res.status).to.eql(200)
+    done()
+  })
+
+})
+
 })
