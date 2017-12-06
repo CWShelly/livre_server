@@ -48,11 +48,9 @@ it('should get the book route', (done)=>{
   request('http://localhost:4000')
   .get('/api/books')
   .end((err, res)=>{
-    // console.log(res.body);
-    console.log(res.status);
-    if(err){
-      console.log(err);
-    };
+     if(err){console.log(err)}
+    expect(err).to.eql(null)
+    expect(res.status).to.eql(200)
     done()
   })
 })
@@ -62,8 +60,6 @@ it('should post to the book db', (done)=>{
   .post('/api/books')
   .send({user_id: 1, title:'Test Title ', author: 'Test Author 2', currentlyWith: 'Test me 2', ownerEmail:'test@test.com', available: 'True'})
   .end((err, res)=>{
-    console.log(res.status);
-    // console.log(res.body);
     expect(err).to.eql(null)
     expect(res.status).to.eql(200)
     done()

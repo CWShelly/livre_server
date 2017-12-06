@@ -8,7 +8,7 @@ module.exports = {
 
 
 bookRouter.post('/books', jsonParser, (req, res, next)=>{
-    console.log(req.body);
+
     let user_id;
     const title = req.body.title;
     const author = req.body.author;
@@ -19,7 +19,7 @@ bookRouter.post('/books', jsonParser, (req, res, next)=>{
     return knex('users')
     .where('email_address', ownerEmail)
     .then((columns)=>{
-        console.log(columns);
+
         var currentlyWith = columns[0].name.toString();
         var user_id = columns[0].id.toString();
         insertBook = { user_id, title, author, available, ownerEmail, currentlyWith };
@@ -29,7 +29,7 @@ bookRouter.post('/books', jsonParser, (req, res, next)=>{
         knex('books')
            .insert(insertBook, '*')
        .then((rows) => {
-           console.log(rows[0]);
+
            const book = rows[0];
            res.send(book);
        })
@@ -51,7 +51,7 @@ bookRouter.get('/books', (req, res, next) => {
 
 
 bookRouter.delete('/books/:id', (req, res, next)=>{
-   console.log(req.params.id);
+
    knex('books')
   .where('id', '=', req.params.id)
   .del()
@@ -67,7 +67,7 @@ bookRouter.delete('/books/:id', (req, res, next)=>{
 
 
 bookRouter.get('/books/:id', (req, res, next) => {
-   console.log(req.params.id);
+
    knex.select('*')
    .from('books')
    .where({id: req.params.id})
@@ -94,7 +94,7 @@ bookRouter.put('/books/:id', jsonParser, (req,res, next)=>{
    // borrowerEmail = ownerEmail
 
    available = req.body.available
-   console.log(req.body);
+
      knex('books')
      .where('id', '=', req.params.id)
      .update({
@@ -104,7 +104,7 @@ bookRouter.put('/books/:id', jsonParser, (req,res, next)=>{
        currentlyWith: currentlyWith
      })
      .then(()=>{
-       console.log('update currently with', currentlyWith);
+
        res.send()
      })
      .catch((err)=>{
@@ -120,10 +120,9 @@ else if (req.body.borrowerEmail === req.body.ownerEmail) {
  return knex('users')
  .where('email_address', borrowerEmail)
  .then((columns)=>{
-   console.log(columns);
-   console.log(columns[0].name.toString());
+
    currentlyWith = columns[0].name.toString()
-   console.log('currently with: ', currentlyWith);
+
  })
  .catch(error=>console.log(error))
  .then(()=>{
@@ -137,7 +136,7 @@ else if (req.body.borrowerEmail === req.body.ownerEmail) {
        currentlyWith: currentlyWith
      })
      .then(()=>{
-       console.log('update currently with', currentlyWith);
+
        res.send()
      })
      .catch((err)=>{
@@ -152,15 +151,14 @@ else if (req.body.borrowerEmail === req.body.ownerEmail) {
    borrowerEmail= req.body.borrowerEmail
    available = "False"
 
-   console.log(borrowerEmail);
+
 
    return knex('users')
    .where('email_address', borrowerEmail)
    .then((columns)=>{
-     console.log(columns);
-     console.log(columns[0].name.toString());
+
      currentlyWith = columns[0].name.toString()
-     console.log('currently with: ', currentlyWith);
+
    })
    .catch(error=>console.log(error))
    .then(()=>{
@@ -173,7 +171,7 @@ else if (req.body.borrowerEmail === req.body.ownerEmail) {
          currentlyWith: currentlyWith
        })
        .then(()=>{
-         console.log('update currently with', currentlyWith);
+
          res.send()
        })
        .catch((err)=>{
@@ -184,6 +182,6 @@ else if (req.body.borrowerEmail === req.body.ownerEmail) {
    })
  }
 
- console.log(req.body);
+
 
 })
