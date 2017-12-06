@@ -5,7 +5,9 @@ const knexConfig = require('./knexfile')[environment];
 
 const knex = require('knex')(knexConfig);
 
-console.log("config", knexConfig);
+console.log("Environment:", knexConfig.connection);
+
+ 
 module.exports ={
     knex:knex,
 

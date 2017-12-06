@@ -8,8 +8,6 @@ module.exports = {
 
 
 userRouter.post('/users', jsonParser, (req, res, next)=>{
-    console.log('posting');
-    console.log(req.body);
     const name = req.body.name;
     const email_address = req.body.email_address;
 
@@ -47,7 +45,6 @@ userRouter.get('/users', (req, res, next) => {
 });
 
 userRouter.get('/users/:id', (req, res, next) => {
-    console.log(req.params.id);
     knex.select('*')
     .from('users')
     .where({id: req.params.id})
@@ -63,7 +60,6 @@ userRouter.get('/users/:id', (req, res, next) => {
 
 
 userRouter.get('/users/:email', (req, res, next) => {
-    console.log('params', req.params);
     knex.select('*')
     .from('users')
     .where({email_address: req.params.email})
@@ -79,9 +75,8 @@ userRouter.get('/users/:email', (req, res, next) => {
 
 
 userRouter.put('/users/:id', jsonParser, (req, res, next)=>{
-  // console.log(req.url);
-  console.log('body', req.body);
-  console.log('params id', req.params.id);
+
+
   knex('users')
   .where('id', '=', req.params.id)
   .update({
@@ -96,7 +91,7 @@ userRouter.put('/users/:id', jsonParser, (req, res, next)=>{
 
 
 userRouter.delete('/users/:id', (req, res, next)=>{
-   console.log(req.params.id);
+
    knex('users')
   .where('id', '=', req.params.id)
   .del()
